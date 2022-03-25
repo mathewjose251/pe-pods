@@ -1,0 +1,10 @@
+#! /bin/bash
+export CONSOLE_FD
+exec {CONSOLE_FD}<> /dev/console
+exec /sbin/init
+exec localectl set-locale LANG=en_US.UTF-8
+
+#cd /root/pe/puppet-enterprise-2021.5.0-el-7-x86_64
+
+#/root/pe/puppet-enterprise-2021.5.0-el-7-x86_64/puppet-enterprise-installer -c /root/pe/pe.conf
+

@@ -1,0 +1,19 @@
+FROM centos/systemd
+
+MAINTAINER "Mathew Jose" <mathjose@paypal.com>
+
+RUN yum -y install httpd
+RUN yum -y install cronie
+RUN  yum clean all
+RUN systemctl disable httpd.service 
+#RUN mkdir /root/pe;cd /root/pe \
+ #   curl -JLO 'https://pm.puppet.com/cgi-bin/download.cgi?dist=el&rel=7&arch=x86_64&ver=latest' \
+  #  tar xvf  /root/pe/puppet-enterprise-2021.5.0-el-7-x86_64.tar.gz
+
+EXPOSE 443 8140 8142 61612 8081 80
+
+VOLUME . /root/pe/
+WORKDIR /root/pe
+ADD pe.conf /root/pe/pe.conf
+ADD systemd /systemd
+ENTRYPOINT ["/systemd"]
